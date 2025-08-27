@@ -1,84 +1,139 @@
 <!doctype html>
 <html lang="pt-BR">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Plano de Treino e Alimentação – Beach Tennis</title>
   <style>
-    body { background:#0f172a; color:#e5e7eb; font-family:Arial, sans-serif; margin:0; line-height:1.6; }
-    .wrap { max-width:900px; margin: auto; padding:20px; }
-    h1 { font-size:26px; margin-bottom:6px; color:#38bdf8; }
-    h2 { margin-top:28px; color:#38bdf8; }
-    h3 { margin-top:18px; color:#22c55e; }
-    .card { background:#111827; padding:14px; border-radius:10px; margin:12px 0; }
-    img, iframe { width:100%; border-radius:8px; margin-top:8px; }
-    ul { margin:6px 0 0 18px; }
-    .footer { color:#94a3b8; font-size:13px; margin-top:28px; }
+    :root { --bg:#0f172a; --card:#111827; --ink:#e5e7eb; --muted:#94a3b8; --accent:#22c55e; --media-h:320px; }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Arial}
+    .wrap{max-width:1100px;margin:auto;padding:24px}
+    h1{margin:0 0 6px;font-size:28px}
+    h2{margin:28px 0 10px;color:#38bdf8}
+    h3{margin:0 0 6px;color:var(--accent)}
+    .grid{display:grid;gap:16px}
+    .cards{grid-template-columns:repeat(auto-fill,minmax(280px,1fr))}
+    .card{background:var(--card);border:1px solid #1f2937;border-radius:14px;padding:16px}
+    ul{margin:8px 0 0 18px}
+    .media{background:#0b1220;border:1px solid #1e293b;border-radius:12px;display:flex;align-items:center;justify-content:center;height:var(--media-h);overflow:hidden}
+    .media img{width:100%;height:100%;object-fit:contain;display:block}
+    .video{position:relative;width:100%;padding-top:56.25%;border-radius:12px;overflow:hidden;border:1px solid #1e293b;background:#0b1220}
+    .video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+    .muted{color:var(--muted);font-size:13px;margin-top:6px}
+    @media (max-width:600px){:root{--media-h:240px}}
   </style>
 </head>
 <body>
   <main class="wrap">
-    <h1>Plano de Treino e Alimentação – Beach Tennis</h1>
-    <p>Foco em explosão de pernas, velocidade de quadra e estabilidade de ombros/antebraço. Alinha-se com treinos técnicos (terça e quinta às 20h) e sauna (sexta à noite).</p>
+    <header>
+      <h1>Plano de Treino e Alimentação – Beach Tennis</h1>
+      <p class="muted">Foco em explosão de pernas, velocidade na areia e estabilidade de ombros/antebraço. Treinos técnicos: ter/qui às 20h. Sauna: sexta à noite.</p>
+    </header>
 
-    <h2>Treino Semanal</h2>
-    <div class="card"><h3>Segunda</h3>Ombro · Antebraço · Core (Face Pull, Elevação lateral, etc.)</div>
-    <div class="card"><h3>Terça</h3>Treino técnico em quadra às 20h</div>
-    <div class="card"><h3>Quarta</h3>Explosão + Pernas (Box Jump, Sprint, Agachamento)</div>
-    <div class="card"><h3>Quinta</h3>Treino técnico em quadra às 20h</div>
-    <div class="card"><h3>Sexta</h3>Peito + Costas + Prevenção + Sauna após 19h</div>
-    <div class="card"><h3>Sábado</h3>Velocidade + Resistência curta</div>
-    <div class="card"><h3>Domingo</h3>Recuperação ativa (alongamento, caminhada leve)</div>
+    <!-- PLANO SEMANAL -->
+    <h2>📅 Treino semanal</h2>
+    <section class="grid cards">
+      <article class="card"><h3>Segunda</h3>
+        <ul><li>Ombro/antebraço/core: Face pull, Elevação lateral, Desenvolvimento militar</li>
+            <li>Rosca punho, Farmer walk, Prancha frontal, Ab wheel</li></ul>
+      </article>
+      <article class="card"><h3>Terça</h3><ul><li>Treino técnico em quadra – 20h</li></ul></article>
+      <article class="card"><h3>Quarta</h3>
+        <ul><li>Explosão + pernas: Box jump, Afundo com salto</li>
+            <li>Sprint 10×15 m; Agachamento, Stiff, Panturrilha</li></ul>
+      </article>
+      <article class="card"><h3>Quinta</h3><ul><li>Treino técnico em quadra – 20h</li></ul></article>
+      <article class="card"><h3>Sexta</h3>
+        <ul><li>Peito/costas/prevenção de ombro</li><li>Sauna após 19h</li></ul>
+      </article>
+      <article class="card"><h3>Sábado</h3>
+        <ul><li>Velocidade + resistência curta (shuttle run, corrida lateral, intervalado)</li></ul>
+      </article>
+      <article class="card"><h3>Domingo</h3>
+        <ul><li>Recuperação ativa (mobilidade, caminhada leve)</li></ul>
+      </article>
+    </section>
 
-    <h2>Cardápio Prático</h2>
-    <div class="card">
-      Café: ovos mexidos + pão integral ou iogurte, fruta<br>
-      Pré-treino: sanduíche integral + fruta<br>
-      Pós-treino: whey + fruta ou frango + arroz branco<br>
-      Jantar leve: omelete ou sopa<br>
-      Ceia (opcional): iogurte com chia ou leite com cacau 70%<br>
-      Hidratação: 2-3 L/dia
-    </div>
+    <!-- CARDÁPIO -->
+    <h2>🍽️ Cardápio prático</h2>
+    <section class="card">
+      <ul>
+        <li><b>Café:</b> ovos + pão integral <i>ou</i> iogurte + fruta</li>
+        <li><b>Pré-treino (18h30):</b> sanduíche integral de frango + fruta</li>
+        <li><b>Pós-treino:</b> whey + fruta <i>ou</i> frango + arroz branco</li>
+        <li><b>Jantar:</b> omelete/claras + salada <i>ou</i> sopa leve</li>
+        <li><b>Ceia (opcional):</b> iogurte + chia <i>ou</i> leite + cacau 70%</li>
+        <li><b>Hidratação:</b> 2–3 L/dia; isotônico em calor intenso</li>
+      </ul>
+    </section>
 
-    <h2>Guia Visual dos Exercícios</h2>
+    <!-- GUIA VISUAL -->
+    <h2>📖 Guia dos exercícios (responsivo, tamanho padronizado)</h2>
 
-    <div class="card">
-      <h3>Prancha Frontal (Plank)</h3>
-      <p>Core alinhado, abdômen ativo.</p>
-      <img src="https://i.imgur.com/AK2WOM5.gif" alt="GIF de prancha frontal">
-    </div>
+    <section class="grid cards">
+      <!-- Plank -->
+      <article class="card">
+        <h3>Prancha Frontal (Plank)</h3>
+        <p>Core alinhado, abdômen ativo, sem “cair” a lombar.</p>
+        <div class="media">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Plank_exercise.svg/1024px-Plank_exercise.svg.png" 
+               alt="Prancha frontal (ilustração Wikimedia)">
+        </div>
+        <div class="muted">Fonte: Wikimedia Commons</div>
+      </article>
 
-    <div class="card">
-      <h3>Afundo com Salto (Jump Lunge)</h3>
-      <p>Explosão e equilíbrio, troca de pernas no ar.</p>
-      <img src="https://i.imgur.com/uU0nF8f.gif" alt="GIF de afundo com salto">
-    </div>
+      <!-- Jump Lunge -->
+      <article class="card">
+        <h3>Afundo com Salto (Jump Lunge)</h3>
+        <p>Explosão e equilíbrio. Alternar as pernas no ar.</p>
+        <div class="media">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/0/0e/Lunge-CDC_strength_training_for_older_adults.gif" 
+               alt="Afundo (GIF demonstrativo CDC/Wikimedia)">
+        </div>
+        <div class="muted">GIF demonstrativo (sem salto) — para salto, faça a troca explosiva no ar.</div>
+      </article>
 
-    <div class="card">
-      <h3>Agachamento Livre</h3>
-      <p>Força e estabilidade, coluna neutra.</p>
-      <img src="https://i.imgur.com/Ekn9Rvl.gif" alt="GIF de agachamento com barra">
-    </div>
+      <!-- Squat -->
+      <article class="card">
+        <h3>Agachamento Livre (Squat)</h3>
+        <p>Força de pernas e glúteos. Coluna neutra e pés firmes.</p>
+        <div class="media">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Wide_stance_squat_with_barbell_1.svg/1024px-Wide_stance_squat_with_barbell_1.svg.png" 
+               alt="Agachamento com barra (diagrama Wikimedia)">
+        </div>
+        <div class="muted">Fonte: Wikimedia Commons</div>
+      </article>
 
-    <div class="card">
-      <h3>Box Jump</h3>
-      <p>Explosão de pernas, aterrissagem suave.</p>
-      <img src="https://i.imgur.com/kes8mYH.gif" alt="GIF de box jump">
-    </div>
+      <!-- Box Jump (vídeo) -->
+      <article class="card">
+        <h3>Box Jump</h3>
+        <p>Explosão e coordenação. Aterrissar macio e descer por passos.</p>
+        <div class="video">
+          <iframe src="https://www.youtube.com/embed/v9cZQqGX1Xk" title="Como fazer Box Jump" loading="lazy" allowfullscreen></iframe>
+        </div>
+      </article>
 
-    <div class="card">
-      <h3>Face Pull (Cabo ou Elástico)</h3>
-      <p>Ombros e trapézio, cotovelos altos.</p>
-      <img src="https://i.imgur.com/Q0qDxGl.gif" alt="GIF de face pull">
-    </div>
+      <!-- Face Pull (vídeo estável) -->
+      <article class="card">
+        <h3>Face Pull</h3>
+        <p>Fortalece ombros e trapézio. Puxar em direção ao rosto, cotovelos altos.</p>
+        <div class="video">
+          <iframe src="https://www.youtube.com/embed/rep-qVOkqgk" title="How To: Face Pull" loading="lazy" allowfullscreen></iframe>
+        </div>
+      </article>
 
-    <div class="card">
-      <h3>Sprint Curto</h3>
-      <p>Arranque rápido (10–15 m), essencial no beach tennis.</p>
-      <iframe src="https://www.youtube.com/embed/BpWhprv5PLw" title="Drills de sprint" frameborder="0" allowfullscreen></iframe>
-    </div>
+      <!-- Sprint (vídeo) -->
+      <article class="card">
+        <h3>Sprint Curto</h3>
+        <p>Arranque de 10–15 m, essencial no beach tennis.</p>
+        <div class="video">
+          <iframe src="https://www.youtube.com/embed/BpWhprv5PLw" title="Drills de Sprint/Aceleração" loading="lazy" allowfullscreen></iframe>
+        </div>
+      </article>
+    </section>
 
-    <p class="footer">Recomendo atualizar as imagens se tiver outras perguntas visuais. Estou à disposição!</p>
+    <p class="muted" style="margin-top:20px">💡 Todas as mídias acima são de fontes públicas estáveis (Wikimedia/YouTube). O tamanho é padronizado via CSS (<code>object-fit:contain</code> para imagens e razão 16:9 para vídeos).</p>
   </main>
 </body>
 </html>
