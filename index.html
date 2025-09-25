@@ -51,14 +51,17 @@
       color: #fff;
       user-select: none;
       cursor: pointer;
-      transition: transform 0.1s ease, filter 0.15s ease;
+      transition: all 0.2s ease;
       margin: 0 auto;
       box-shadow: 0 6px 12px rgba(0,0,0,0.4), inset 0 3px 6px rgba(0,0,0,0.3);
     }
     .btn:active {
       transform: scale(0.92);
-      filter: brightness(0.85);
-      box-shadow: 0 2px 6px rgba(0,0,0,0.6), inset 0 6px 12px rgba(0,0,0,0.5);
+    }
+    .btn.success {
+      background: radial-gradient(circle at 30% 30%, #6ee7b7, #059669);
+      border-color: #059669;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.4), inset 0 3px 6px rgba(0,0,0,0.3);
     }
     .label {
       margin-top: 12px;
@@ -115,14 +118,32 @@
 
   <script>
     document.querySelectorAll('.btn').forEach(btn => {
-      btn.addEventListener('click', () => {
+      btn.addEventListener('mousedown', () => {
+        btn.classList.add('success');
+        if (navigator.vibrate) navigator.vibrate(40);
         const url = btn.getAttribute('data-url');
-        // Disparo via Beacon (GET) para evitar CORS
         const beacon = new Image();
         const u = new URL(url);
         u.searchParams.set('_t', Date.now());
         beacon.src = u.toString();
-        if (navigator.vibrate) navigator.vibrate(50);
+      });
+      btn.addEventListener('mouseup', () => {
+        setTimeout(() => btn.classList.remove('success'), 200);
+      });
+      btn.addEventListener('mouseleave', () => {
+        btn.classList.remove('success');
+      });
+      btn.addEventListener('touchstart', () => {
+        btn.classList.add('success');
+        if (navigator.vibrate) navigator.vibrate(40);
+        const url = btn.getAttribute('data-url');
+        const beacon = new Image();
+        const u = new URL(url);
+        u.searchParams.set('_t', Date.now());
+        beacon.src = u.toString();
+      }, {passive: true});
+      btn.addEventListener('touchend', () => {
+        setTimeout(() => btn.classList.remove('success'), 200);
       });
     });
   </script>
