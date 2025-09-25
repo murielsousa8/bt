@@ -61,13 +61,24 @@
     .btn.success {
       background: radial-gradient(circle at 30% 30%, #6ee7b7, #059669);
       border-color: #059669;
-      box-shadow: 0 6px 12px rgba(0,0,0,0.4), inset 0 3px 6px rgba(0,0,0,0.3);
     }
     .label {
       margin-top: 12px;
       text-align: center;
       color: #e5e7eb;
       font-weight: 600;
+    }
+    .confirm {
+      margin-top: 6px;
+      text-align: center;
+      color: #10b981;
+      font-weight: 600;
+      font-size: 14px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .confirm.show {
+      opacity: 1;
     }
   </style>
 </head>
@@ -79,14 +90,17 @@
         <div>
           <button class="btn" data-url="http://174.138.116.90/device-io/261/receive-event"></button>
           <div class="label">Quadra 01</div>
+          <div class="confirm">Lance Gravado</div>
         </div>
         <div>
           <button class="btn" data-url="http://174.138.116.90/device-io/262/receive-event"></button>
           <div class="label">Quadra 02</div>
+          <div class="confirm">Lance Gravado</div>
         </div>
         <div>
           <button class="btn" data-url="http://174.138.116.90/device-io/263/receive-event"></button>
           <div class="label">Quadra 03</div>
+          <div class="confirm">Lance Gravado</div>
         </div>
       </div>
     </div>
@@ -97,10 +111,12 @@
         <div>
           <button class="btn" data-url="http://174.138.116.90/device-io/182/receive-event"></button>
           <div class="label">Quadra 01</div>
+          <div class="confirm">Lance Gravado</div>
         </div>
         <div>
           <button class="btn" data-url="http://174.138.116.90/device-io/183/receive-event"></button>
           <div class="label">Quadra 02</div>
+          <div class="confirm">Lance Gravado</div>
         </div>
       </div>
     </div>
@@ -111,21 +127,28 @@
         <div>
           <button class="btn" data-url="http://174.138.116.90/device-io/238/receive-event"></button>
           <div class="label">Quadra 01</div>
+          <div class="confirm">Lance Gravado</div>
         </div>
       </div>
     </div>
   </div>
 
   <script>
+    function sendGet(url) {
+      fetch(url, { method: 'GET', mode: 'no-cors' })
+        .catch(() => {});
+    }
+
     document.querySelectorAll('.btn').forEach(btn => {
       btn.addEventListener('mousedown', () => {
         btn.classList.add('success');
         if (navigator.vibrate) navigator.vibrate(40);
         const url = btn.getAttribute('data-url');
-        const beacon = new Image();
-        const u = new URL(url);
-        u.searchParams.set('_t', Date.now());
-        beacon.src = u.toString();
+        sendGet(url);
+
+        const confirmEl = btn.parentElement.querySelector('.confirm');
+        confirmEl.classList.add('show');
+        setTimeout(() => confirmEl.classList.remove('show'), 3000);
       });
       btn.addEventListener('mouseup', () => {
         setTimeout(() => btn.classList.remove('success'), 200);
@@ -137,10 +160,11 @@
         btn.classList.add('success');
         if (navigator.vibrate) navigator.vibrate(40);
         const url = btn.getAttribute('data-url');
-        const beacon = new Image();
-        const u = new URL(url);
-        u.searchParams.set('_t', Date.now());
-        beacon.src = u.toString();
+        sendGet(url);
+
+        const confirmEl = btn.parentElement.querySelector('.confirm');
+        confirmEl.classList.add('show');
+        setTimeout(() => confirmEl.classList.remove('show'), 3000);
       }, {passive: true});
       btn.addEventListener('touchend', () => {
         setTimeout(() => btn.classList.remove('success'), 200);
