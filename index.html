@@ -134,42 +134,38 @@
   </div>
 
   <script>
+    // Envio 100% via GET usando elemento Image (evita CORS/preflight)
     function sendGet(url) {
-      fetch(url, { method: 'GET', mode: 'no-cors' })
-        .catch(() => {});
+      const u = new URL(url, window.location.href);
+      u.searchParams.set('_t', Date.now()); // evita cache
+      const img = new Image();
+      img.src = u.toString();
+      // Não confiamos em onload/onerror (nem sempre disparam com content-type diferente),
+      // o objetivo é apenas garantir que o GET seja enviado.
     }
 
-    document.querySelectorAll('.btn').forEach(btn => {
-      btn.addEventListener('mousedown', () => {
+    function armButton(btn){
+      const confirmEl = btn.parentElement.querySelector('.confirm');
+      const down = () => {
         btn.classList.add('success');
         if (navigator.vibrate) navigator.vibrate(40);
-        const url = btn.getAttribute('data-url');
-        sendGet(url);
+        sendGet(btn.getAttribute('data-url'));
+        if (confirmEl){
+          confirmEl.classList.add('show');
+          clearTimeout(btn._confirmTimer);
+          btn._confirmTimer = setTimeout(()=>confirmEl.classList.remove('show'), 3000);
+        }
+      };
+      const up = () => {
+        setTimeout(()=>btn.classList.remove('success'), 120);
+      };
+      btn.addEventListener('pointerdown', down);
+      btn.addEventListener('pointerup', up);
+      btn.addEventListener('pointerleave', up);
+      btn.addEventListener('pointercancel', up);
+    }
 
-        const confirmEl = btn.parentElement.querySelector('.confirm');
-        confirmEl.classList.add('show');
-        setTimeout(() => confirmEl.classList.remove('show'), 3000);
-      });
-      btn.addEventListener('mouseup', () => {
-        setTimeout(() => btn.classList.remove('success'), 200);
-      });
-      btn.addEventListener('mouseleave', () => {
-        btn.classList.remove('success');
-      });
-      btn.addEventListener('touchstart', () => {
-        btn.classList.add('success');
-        if (navigator.vibrate) navigator.vibrate(40);
-        const url = btn.getAttribute('data-url');
-        sendGet(url);
-
-        const confirmEl = btn.parentElement.querySelector('.confirm');
-        confirmEl.classList.add('show');
-        setTimeout(() => confirmEl.classList.remove('show'), 3000);
-      }, {passive: true});
-      btn.addEventListener('touchend', () => {
-        setTimeout(() => btn.classList.remove('success'), 200);
-      });
-    });
+    document.querySelectorAll('.btn').forEach(armButton);
   </script>
 </body>
 </html>
